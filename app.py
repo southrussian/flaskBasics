@@ -17,6 +17,10 @@ class Main(Resource):
         else:
             return courses[course_id]
 
+    def delete(self, course_id):
+        del  courses[course_id]
+        return courses
+
 
 api.add_resource(Main, "/api/courses/<int:course_id>")
 api.init_app(app)
