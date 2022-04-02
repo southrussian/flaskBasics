@@ -4,13 +4,21 @@ from flask_restful import Api, Resource
 app = Flask(__name__)
 api = Api()
 
+courses = {
+    1: {"name": "Python"},
+    2: {"name": "Swift"}
+}
+
 
 class Main(Resource):
-    def get(self):
-        return {"info": "Some info", "num": 56}
+    def get(self, course_id):
+        if course_id == 0:
+            return courses
+        else:
+            return courses[course_id]
 
 
-api.add_resource(Main, "/api/main")
+api.add_resource(Main, "/api/courses/<int:course_id>")
 api.init_app(app)
 
 if __name__ == '__main__':
